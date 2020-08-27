@@ -11,14 +11,25 @@ def valid_usrname (usrname):
 		return True
 		
 def valid_password (password):
-	if len(password) < 8 or not(password.isalpha()) or not(password.islower()) or not(password.isupper()) or password.count(" ") > 0:
+	if (len(password) < 8 or password.isalpha() or (password.islower() or password.isupper()) or password.count(" ") > 0):
 		return "La contraseña elegida no es segura"
 	else:
 		return True
 
-usrname = input("Indique su nombre de usuario: ")
-usrname_validation = valid_usrname(usrname)
-print (usrname_validation)
-password = input("Ingrese su password: ")
-password_validation = valid_password(password)
-print (password_validation)
+while True:
+	usrname = input("Indique su nombre de usuario: ")
+	usrname_valid = valid_usrname(usrname)
+	if usrname_valid == True:
+		break
+	else:
+		print (usrname_valid)
+print ("Usuario Ingresado: ", usrname)
+
+while True:
+	password = input("Ingrese su password: ")
+	password_valid = valid_password(password)
+	if password_valid == True:
+		break
+	else:
+		print (password_valid)
+print ("Password Ingresado: ", password)
