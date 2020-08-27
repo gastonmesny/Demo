@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import MySQLdb
+import mysql.connector
 
 username = 'root'
 password = ''
@@ -8,19 +8,15 @@ dbname = 'aumentos'
 
 def run_query (query=''):
 	datos = [servername, username, password, dbname]
-	
-	conn = MySQLdb.connect(*datos)
+	print (query)
+	conn =  mysql.connector.connect(host=servername,database=dbname,user=username,password=password)
 	cursor = conn.cursor()
 	cursor.execute(query)
 	
-	if query.upper().startwith('SELECT'):
-		data = cursor.fetchall()
-	else:
-		conn.commit()
-		data = None
+	data = cursor.fetchall()
 	
 	cursor.close()
-	conn.close
+	conn.close()
 	
 	return data
 	
